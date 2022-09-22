@@ -1,0 +1,25 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+  .header {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    height: 80px;
+}
+.header img {
+    height: 70%;
+    width:320px;
+    margin-left: 20px;
+}
+.header a {
+    color: black;
+    text-decoration: none;
+    font-family:'Courier New', Courier, monospace;
+    margin: 15px;
+    font-weight: bold;
+}
+.header a:hover {
+    background-color: grey;
+    padding:5px;
+    border-radius: 5px;
+    color: white;
+}

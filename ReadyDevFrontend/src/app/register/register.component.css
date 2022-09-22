@@ -1,0 +1,58 @@
+.body
+{
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+.text-center{
+    text-align: center;
+    top: 20%;  
+    position: relative;
+
+}
+.text-center h4 {
+    font-weight: bold;
+    font-size: 20px;
+}
+.example-container{
+    background-color: rgba(144, 167, 243, 0.592);
+    padding: 30px;
+    border-radius: 20px;
+    height: 50%;
+    width: 20%;
+    text-align: left;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.d-flex-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.mat-form-field{
+    width: 100%;
+}
+.mt-top{
+    margin-top: 40px;
+    text-align: center;
+}
+.mt-top-2{
+    margin-top: 10px;
+}
+.registerdiv{
+    margin-top: 20px;
+    text-align: center;
+}
+.registerdiv p {
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 15px;
+}
+.registerdiv p a {
+    font-weight: bold;
+    margin-left: 10px;
+}
+.line {
+    margin-top: 30px;
+    width: 80%;
+}

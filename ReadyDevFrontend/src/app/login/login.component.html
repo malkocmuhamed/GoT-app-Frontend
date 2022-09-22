@@ -1,0 +1,35 @@
+<div class="body">
+<div class="text-center">
+    <h4 class="text-center"> Login</h4>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate class="d-flex-center">
+      <div class="example-container">
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="Username" formControlName="username">
+            <mat-error *ngIf="loginForm.get('username')?.invalid && (loginForm.get('username')?.dirty || loginForm.get('username')?.touched) && loginForm.get('username')?.errors?.required">
+              Username is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="mt-top-2">
+          <mat-form-field>
+            <input matInput type="password" placeholder="Password" formControlName="password">    
+            <mat-error *ngIf="!loginForm.get('password')?.errors?.required">
+              Password length must be greater than or equal to 8 and password must contain one or more uppercase , lowercase , numeric and special characters
+            </mat-error>
+            <mat-error *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched) && loginForm.get('password')?.errors?.required">
+              Password is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="mt-top">
+          <button [disabled]="!loginForm.valid" mat-raised-button color="primary" mat-button>Sign In</button>
+        </div>
+        <hr class="line">
+        <div class="registerdiv">
+            <p>No account? <a href="/register">Create one here</a></p>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

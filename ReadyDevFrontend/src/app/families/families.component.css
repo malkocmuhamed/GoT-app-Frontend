@@ -1,0 +1,53 @@
+.table
+{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 70%;
+    color: black;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 15px;
+    border-collapse: collapse; 
+}
+h2 {
+    font-family:'Courier New', Courier, monospace;
+    text-align: center;
+    margin: 30px;
+}
+h2 a {
+    text-decoration: none;
+    font-weight: bold;
+    font-style: italic;
+    color: black;   
+}
+h2 a:hover {
+    color: rgb(99, 62, 62);
+}
+.deletebutton
+{
+    background-color: black;
+    border-radius: 2px;
+    border: none;
+    height: 28px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 6px;
+    color: white;
+    width: 80px;
+}
+
+.deletebutton:hover
+{
+    background-color: white;
+    border-radius: 2px;
+    border: none;
+    height: 28px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 6px;
+    color: black;
+}
+thead tr {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border-bottom: 1px solid black;
+    height: 40px;
+}
+tbody tr {
+    height: 40px;
+    border-bottom: 1px  black;
+}
