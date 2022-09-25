@@ -1,7 +1,11 @@
+import { HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Route, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthenticatedResponse } from '../_models/authenticatedresponse.model';
+import { User } from '../_models/user.model';
+import { UserService } from '../_services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -9,20 +13,15 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup | any;
   title = 'material-login';
+  invalidLogin: boolean | any;
+  credentials: User = {name:'', username:'', password:''};
+  loginForm = this.userService.loginForm;
 
-  
   constructor(
-    private router:Router, private toastr: ToastrService
+    private router:Router, private toastr: ToastrService, private userService: UserService
   ) {
-    this.loginForm = new FormGroup({
-      username: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required,Validators.pattern(
-        '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$'
-      )])
-    });
-   }
+  }
 
   ngOnInit(): void {
   }
@@ -31,11 +30,15 @@ export class LoginComponent implements OnInit {
     this.toastr.success('This is a success message', 'Tada');
   }
 
-  onSubmit(){
-    if(!this.loginForm.valid){
-      return;
-    }
-    localStorage.setItem('user',this.loginForm.value)
-    this.router.navigate(['/home'])
+  login(){
+    this.userService.login();
   }
+
+  // onSubmit(){
+  //   if(!this.loginForm.valid){
+  //     return;
+  //   }
+  //   localStorage.setItem('user',this.loginForm.value)
+  //   this.router.navigate(['/home'])
+  // }
 }

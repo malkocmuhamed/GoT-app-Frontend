@@ -1,0 +1,7 @@
+.body {
+    width: 300px;
+    text-align: center;
+}
+mat-form-field {
+    margin: 8px;
+}

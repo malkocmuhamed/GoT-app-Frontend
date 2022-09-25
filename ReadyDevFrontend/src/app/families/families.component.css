@@ -32,7 +32,10 @@ h2 a:hover {
     color: white;
     width: 80px;
 }
-
+.createbtn {
+    font-size: 16px;
+    font-style: italic;
+}
 .deletebutton:hover
 {
     background-color: white;

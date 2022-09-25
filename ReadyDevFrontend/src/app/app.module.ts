@@ -20,6 +20,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { EditfamilyComponent } from './editfamily/editfamily.component';
 import { CreatefamilyComponent } from './createfamily/createfamily.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { DeletemodalComponent } from './deletemodal/deletemodal.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     FamiliesComponent,
     HeaderComponent,
     EditfamilyComponent,
-    CreatefamilyComponent
+    CreatefamilyComponent,
+    DeletemodalComponent
   ],
   imports: [
     BrowserModule,

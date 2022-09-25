@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Injectable({
@@ -12,7 +13,7 @@ export class FamilyService {
 
     familiesUrl = environment.baseUrl + '/api/family';
 
-    constructor(private _http: HttpClient) { }
+    constructor(private _http: HttpClient, public toastr: ToastrService) { }
 
     postFamily(family: Family) {
         return this._http.post<any>(this.familiesUrl, family);
@@ -32,7 +33,7 @@ export class FamilyService {
 
     deleteFamily(id: number) {
         this._http.delete(this.familiesUrl + '/' + id).subscribe(data => {
-            alert("Family with ID " + id + ": Successfully removed!");
+            this.toastr.success('Family removed successfully.');
         });     
     }
 }

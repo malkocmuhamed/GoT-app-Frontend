@@ -1,1 +1,34 @@
-<app-header></app-header>
+<div class="body">
+        <h4 class="text-center"> Add new family</h4>
+        <form [formGroup]="familyForm"  (ngSubmit)="addFamily()" novalidate class="d-flex-center">
+          <div>
+            <div>
+                <mat-form-field>
+                  <input matInput placeholder="Family name" formControlName="familyName">
+                  <mat-error *ngIf="familyForm.get('familyName')?.invalid && (familyForm.get('familyName')?.dirty || familyForm.get('familyName')?.touched) && familyForm.get('familyName')?.errors?.required">
+                    Field is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            <div>
+              <mat-form-field>
+                <input matInput placeholder="Logo URL" formControlName="logo">
+                <mat-error *ngIf="familyForm.get('logo')?.invalid && (familyForm.get('logo')?.dirty || familyForm.get('logo')?.touched) && familyForm.get('logo')?.errors?.required">
+                  Field is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="mt-top-2">
+              <mat-form-field>
+                <input matInput placeholder="Representative" formControlName="representative">    
+                <mat-error *ngIf="familyForm.get('representative')?.invalid && (familyForm.get('representative')?.dirty || familyForm.get('representative')?.touched) && familyForm.get('representative')?.errors?.required">
+                  Field is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+             <div>
+              <button [disabled]="!familyForm.valid"  mat-raised-button type="submit">Add family</button>
+            </div>         
+          </div>
+        </form>
+    </div>

@@ -1,5 +1,5 @@
  <app-header></app-header>
-<h2> Are you looking to expand your team? <a href="/createfamily">CREATE A FAMILY</a></h2>
+<h2> Are you looking to expand your team? <button class="createbtn" mat-button (click)="postFamily()">CREATE A FAMILY</button></h2>
  <table class="table">
   <thead>
     <tr>
@@ -15,8 +15,8 @@
       <td>{{family.familyName}}</td>
       <td>{{family.logo}}</td>
       <td>{{family.representative}}</td>
-      <td><button class="deletebutton" routerLink="/editfamily/:id">Update</button></td>
-      <td><button class="deletebutton"   (click)="removeFamily(family.id)">Delete</button></td>
+      <td><button class="deletebutton"   (click)="editFamily()">Update</button></td>
+      <td><button class="deletebutton"   (click)="deleteConfirm(family.id)">Delete</button></td>
     </tr>
   </tbody>
   <!-- removeFamily(family.id) -->
