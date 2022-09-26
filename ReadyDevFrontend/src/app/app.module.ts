@@ -8,7 +8,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { ToastrModule } from 'ngx-toastr';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -21,13 +20,13 @@ import { EditfamilyComponent } from './editfamily/editfamily.component';
 import { CreatefamilyComponent } from './createfamily/createfamily.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DeletemodalComponent } from './deletemodal/deletemodal.component';
-import { JwtInterceptor } from './_interceptors/jwt.interceptor';
+import { JwtInterceptor } from './_helpers/jwt.interceptor';
+import { ErrorInterceptor } from './_helpers/error.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent,
     RegisterComponent,
     DashboardComponent,
     FamiliesComponent,
@@ -51,7 +50,10 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
     MatPaginatorModule,
     MatDialogModule
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

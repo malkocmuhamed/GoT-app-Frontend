@@ -46,14 +46,21 @@ export class FamiliesComponent {
   postFamily(): void {
     this.dialog.open(CreatefamilyComponent, {
       width: '350px',
-      height: '380px'
+      height: '380px'  
     });
   }
   
-  editFamily(): void {
+  editFamily(id: number): void {
+    let family = this.families.find(x => x.id == id);
     this.dialog.open(EditfamilyComponent, {
       width: '350px',
-      height: '380px'
+      height: '400px',
+      data: {
+        id: family?.id,
+        familyName: family?.familyName,
+        logo: family?.logo,
+        representative: family?.representative
+      }
     });
   }
 }

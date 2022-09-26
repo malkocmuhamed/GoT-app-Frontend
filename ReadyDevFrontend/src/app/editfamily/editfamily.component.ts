@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators} from '@angular/forms';
 import { Family } from '../_models/family.model';
 import { Route, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FamilyService } from '../_services/family.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DeletemodalComponent } from '../deletemodal/deletemodal.component';
 
 @Component({
   selector: 'app-editfamily',
@@ -18,7 +20,9 @@ export class EditfamilyComponent implements OnInit {
   constructor(
     public toastr: ToastrService,
     public router: Router,
-    public familyService: FamilyService
+    public familyService: FamilyService,
+    public dialogRef: MatDialogRef<DeletemodalComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Family,
     ) { }
 
   familyForm = new FormGroup(
@@ -32,13 +36,9 @@ export class EditfamilyComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  get f() {
-    return this.familyForm.controls;
-  }
- 
   onSubmit(): void{
   
-    this.familyService.editFamily(this.familyModel).subscribe(
+    this.familyService.editFamily(this.familyForm.value).subscribe(
       data => {
         this.toastr.success('Family successfully updated!');
       })

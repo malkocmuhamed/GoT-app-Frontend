@@ -14,6 +14,7 @@ export class FamilyService {
     getfamiliesUrl = environment.baseUrl + '/api/family/getAllFamilies';
     familiesbyUserUrl = environment.baseUrl + '/api/family/getFamiliesByUser';
     postFamilyUrl = environment.baseUrl + '/api/family/postFamily';
+    updateFamilyUrl = environment.baseUrl + '/api/family/editFamily';
     removeFamilyUrl = environment.baseUrl + '/api/family/removeFamily';
 
 
@@ -36,7 +37,7 @@ export class FamilyService {
     }
 
     editFamily(family: Family) {
-        return this._http.put<any>(this.getfamiliesUrl, family);
+        return this._http.put<any>(this.updateFamilyUrl, family);
     }
 
     deleteFamily(id: number) {

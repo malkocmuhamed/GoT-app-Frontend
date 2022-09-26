@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
-import { Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { User } from "../_models/user.model";
 import { environment } from '../../environments/environment';
 import { FormControl, FormGroup, NgForm, Validators } from "@angular/forms";
@@ -14,7 +14,7 @@ import { ToastrService } from "ngx-toastr";
 export class UserService {
     loginForm: FormGroup | any;
     invalidLogin: boolean | any;
-  
+    
     usersUrl = environment.baseUrl + '/api/user';
     authUrl = environment.baseUrl + '/api/user/login';
     registerUserUrl = environment.baseUrl + '/api/user/register';
@@ -29,6 +29,8 @@ export class UserService {
             });
          }
 
+    
+    
     postUser(user: User) {
         return this._http.post<any>(this.registerUserUrl, user);
     }
@@ -50,9 +52,15 @@ export class UserService {
               this.router.navigate(["/dashboard"]);
               this.toastr.success('User authenticated successfully.');
             },
-            error: (err: HttpErrorResponse) => this.invalidLogin = true
+            error: (err: HttpErrorResponse) => this.invalidLogin = false
           })
         }
+      }
+     
+      logout(){
+        localStorage.removeItem("jwt");
+        this.router.navigate(['/login']);
+        this.toastr.info("Login session has expired.");
       }
     
 }

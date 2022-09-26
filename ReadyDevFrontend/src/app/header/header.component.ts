@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { UserService } from '../_services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -9,15 +10,13 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public router: Router, public toastr: ToastrService) { }
+  constructor(public router: Router, public toastr: ToastrService, private userService: UserService) { }
 
   ngOnInit(): void {
   }
 
   logout = () => {
-    localStorage.removeItem("jwt");
-    this.router.navigate(['/login']);
-    this.toastr.info("Login session has expired.");
+    this.userService.logout();
   }
 
 }

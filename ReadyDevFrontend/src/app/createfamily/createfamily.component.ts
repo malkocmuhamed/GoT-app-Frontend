@@ -37,12 +37,13 @@ export class CreatefamilyComponent implements OnInit {
     }
     this.familyService.postFamily(this.familyForm.value).subscribe(
       data => {
-            console.log(data);
-            this.toastr.success('New family has been added.');
-      })
+        console.log(data);
+      }
+    )
     this.dialog.closeAll();
     location.reload();
     this.router.navigate(['/families']);
+    this.toastr.success('New family has been added.', "SUCCESS");
   }
   
 }

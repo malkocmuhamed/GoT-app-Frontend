@@ -15,20 +15,8 @@
       <td>{{family.familyName}}</td>
       <td>{{family.logo}}</td>
       <td>{{family.representative}}</td>
-      <td><button class="deletebutton"   (click)="editFamily()">Update</button></td>
+      <td><button class="deletebutton"   (click)="editFamily(family.id)">Update</button></td>
       <td><button class="deletebutton"   (click)="deleteConfirm(family.id)">Delete</button></td>
     </tr>
   </tbody>
-  <!-- removeFamily(family.id) -->
-  <!-- <tfoot>
-    <tr>
-      <td colspan="4">
-        <mat-paginator [length]="100"
-        [pageSize]="10"
-        [pageSizeOptions]="[5, 10, 25, 100]"
-        aria-label="Select page">
-        </mat-paginator>
-      </td>
-    </tr>
-  </tfoot> -->
 </table> 
