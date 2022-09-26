@@ -27,7 +27,7 @@ export class FamiliesComponent {
 
   
   getFamiliesList(): void {
-    this.familyService.getAllFamilies().subscribe(data => {
+    this.familyService.getFamiliesByUser().subscribe(data => {
       this.families = data;
     })
   }
@@ -37,14 +37,13 @@ export class FamiliesComponent {
     this.dialog.open(DeletemodalComponent, {
       width: '300px',
       data: {
-        id: family?.id
+        id: family?.id,
+        familyName: family?.familyName
       }
     });
   }
 
   postFamily(): void {
-    // let familyData: Family[] = Array.from(this.families);
-    // let family = this.families.findIndex(x => x.id == id);
     this.dialog.open(CreatefamilyComponent, {
       width: '350px',
       height: '380px'
@@ -52,19 +51,9 @@ export class FamiliesComponent {
   }
   
   editFamily(): void {
-    // let familyData: Family[] = Array.from(this.families);
-    // let family = this.families.findIndex(x => x.id == id);
     this.dialog.open(EditfamilyComponent, {
       width: '350px',
       height: '380px'
     });
   }
-
-  // removeFamily(id: number): void {
-  //   let familiesArray: Family[] = Array.from(this.families);
-  //   let index = familiesArray.findIndex(element => element.id == id);
-  //   this.familyService.deleteFamily(id);
-  //   this.families.splice(index, 1);
-  // }
-
 }

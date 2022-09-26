@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -21,6 +21,7 @@ import { EditfamilyComponent } from './editfamily/editfamily.component';
 import { CreatefamilyComponent } from './createfamily/createfamily.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DeletemodalComponent } from './deletemodal/deletemodal.component';
+import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,7 @@ import { DeletemodalComponent } from './deletemodal/deletemodal.component';
     MatPaginatorModule,
     MatDialogModule
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

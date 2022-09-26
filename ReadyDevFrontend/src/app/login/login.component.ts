@@ -26,19 +26,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  success(): void {
-    this.toastr.success('This is a success message', 'Tada');
-  }
-
   login(){
     this.userService.login();
   }
 
-  // onSubmit(){
-  //   if(!this.loginForm.valid){
-  //     return;
-  //   }
-  //   localStorage.setItem('user',this.loginForm.value)
-  //   this.router.navigate(['/home'])
-  // }
 }

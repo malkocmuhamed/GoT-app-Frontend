@@ -4,6 +4,8 @@ import { FamilyService } from '../_services/family.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { FamiliesComponent } from '../families/families.component';
 import { NgModel } from '@angular/forms';
+import { ResourceLoader } from '@angular/compiler';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-deletemodal',
@@ -17,7 +19,8 @@ export class DeletemodalComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<DeletemodalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Family,
-    public familyService: FamilyService) 
+    public familyService: FamilyService,
+    public toastr: ToastrService) 
     { 
       this.families = [];
     }
@@ -33,9 +36,8 @@ export class DeletemodalComponent implements OnInit {
     let index = familyArray.findIndex(element => element.id == id);
     this.familyService.deleteFamily(id);
     this.families.splice(index, 1);
-    console.log(index);
     this.dialogRef.close();
-  }
+    location.reload();
 
-  
+  }
 }

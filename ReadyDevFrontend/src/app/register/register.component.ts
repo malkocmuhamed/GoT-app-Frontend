@@ -16,18 +16,14 @@ import { FormsModule } from '@angular/forms';
 
 export class RegisterComponent implements OnInit {
 
-  // registerForm: FormGroup | any;
   title = 'material-register';
   success = '';
-  userModel = <User>{};
 
   registerForm = new FormGroup(
     {
       name: new FormControl('', [Validators.required]),
       username: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required,Validators.pattern(
-        '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$'
-      )]),
+      password: new FormControl('', [Validators.required]),
       confirmpassword: new FormControl('', [Validators.required]),
     },
      CustomValidator.mustMatch('password', 'confirmpassword')
@@ -36,13 +32,15 @@ export class RegisterComponent implements OnInit {
   constructor
   (
     public toastr: ToastrService, 
+    private router: Router,
     private userService: UserService
     ) 
   { }
 
   ngOnInit(): void {
+    console.log(this.registerForm.valid)
   }
-
+ 
   get passwordMatchError() {
     return (
       this.registerForm.getError('mismatch') &&
@@ -54,12 +52,12 @@ export class RegisterComponent implements OnInit {
     if(!this.registerForm.valid){
       return;
     }
-    this.userService.postUser(this.userModel).subscribe(
+    this.userService.postUser(this.registerForm.value).subscribe(
       data => {
         console.log(data);
-        this.toastr.success('Your registration has been approved.', 'Congratulations!');
+        this.toastr.success('Your registration has been approved. Sign in to continue.', 'Congratulations!');
       })
-    // this.router.navigate(['/login'])
+    this.router.navigate(['/login'])
   } 
 }
 

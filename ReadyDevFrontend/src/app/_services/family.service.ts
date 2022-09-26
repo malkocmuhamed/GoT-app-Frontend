@@ -11,29 +11,39 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class FamilyService {
 
-    familiesUrl = environment.baseUrl + '/api/family';
+    getfamiliesUrl = environment.baseUrl + '/api/family/getAllFamilies';
+    familiesbyUserUrl = environment.baseUrl + '/api/family/getFamiliesByUser';
+    postFamilyUrl = environment.baseUrl + '/api/family/postFamily';
+    removeFamilyUrl = environment.baseUrl + '/api/family/removeFamily';
+
 
     constructor(private _http: HttpClient, public toastr: ToastrService) { }
 
     postFamily(family: Family) {
-        return this._http.post<any>(this.familiesUrl, family);
+        return this._http.post<any>(this.postFamilyUrl, family);
     }
    
     getFamilyById(id: number): Observable<Family> {
-        return this._http.get<Family>(this.familiesUrl + '/' + id);
+        return this._http.get<Family>(this.getfamiliesUrl + '/' + id);
+    }
+
+    getFamiliesByUser(): Observable<Family[]> {
+        return this._http.get<Family[]>(this.familiesbyUserUrl);
     }
 
     getAllFamilies(): Observable<Family[]> {
-        return this._http.get<Family[]>(this.familiesUrl);
+        return this._http.get<Family[]>(this.getfamiliesUrl);
     }
 
     editFamily(family: Family) {
-        return this._http.put<any>(this.familiesUrl, family);
+        return this._http.put<any>(this.getfamiliesUrl, family);
     }
 
     deleteFamily(id: number) {
-        this._http.delete(this.familiesUrl + '/' + id).subscribe(data => {
-            this.toastr.success('Family removed successfully.');
-        });     
+        this._http.delete(this.removeFamilyUrl + '/' + id).subscribe(
+            data => {
+                this.toastr.success('Family removed successfully.');
+            }
+        ) 
     }
 }

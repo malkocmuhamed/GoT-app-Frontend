@@ -14,10 +14,10 @@ import { ToastrService } from "ngx-toastr";
 export class UserService {
     loginForm: FormGroup | any;
     invalidLogin: boolean | any;
-    credentials: User = {name:'', username:'', password:''};
   
     usersUrl = environment.baseUrl + '/api/user';
     authUrl = environment.baseUrl + '/api/user/login';
+    registerUserUrl = environment.baseUrl + '/api/user/register';
    
     constructor(private router: Router, 
         private _http: HttpClient,
@@ -30,16 +30,16 @@ export class UserService {
          }
 
     postUser(user: User) {
-        return this._http.post<any>(this.usersUrl, user);
+        return this._http.post<any>(this.registerUserUrl, user);
     }
 
     getUserById(id: number): Observable<User> {
         return this._http.get<User>(this.usersUrl + '/' + id);
     }
 
-    login = () => {
+    login() {
         if (this.loginForm.valid) {
-          this._http.post<AuthenticatedResponse>(this.authUrl, this.credentials, {
+          this._http.post<AuthenticatedResponse>(this.authUrl, this.loginForm.value, {
             headers: new HttpHeaders({ "Content-Type": "application/json"})
           })
           .subscribe({

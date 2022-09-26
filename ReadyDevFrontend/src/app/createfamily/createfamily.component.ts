@@ -4,6 +4,7 @@ import { Family } from '../_models/family.model';
 import { Route, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FamilyService } from '../_services/family.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-createfamily',
@@ -12,37 +13,35 @@ import { FamilyService } from '../_services/family.service';
 })
 export class CreatefamilyComponent implements OnInit {
 
-  // familyForm : FormGroup | any;
-  familyModel = <Family>{};
-
-  constructor(
-    public toastr: ToastrService,
-    public router: Router,
-    private familyService: FamilyService
-  ) { 
-  }
-
   familyForm = new FormGroup(
     {
       familyName: new FormControl('', [Validators.required]),
       logo: new FormControl('', [Validators.required]),
-      representative: new FormControl('', [Validators.required])
-    }
+      representative: new FormControl('', [Validators.required]),
+    },
   );
+
+  constructor(
+    public toastr: ToastrService,
+    public router: Router,
+    private familyService: FamilyService,
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
   }
 
-  get f() {
-    return this.familyForm.controls;
-  }
- 
   addFamily(): void{
-    this.familyService.postFamily(this.familyModel).subscribe(
+    if(!this.familyForm.valid){
+      return;
+    }
+    this.familyService.postFamily(this.familyForm.value).subscribe(
       data => {
+            console.log(data);
             this.toastr.success('New family has been added.');
-      }
-    )
+      })
+    this.dialog.closeAll();
+    location.reload();
     this.router.navigate(['/families']);
   }
   

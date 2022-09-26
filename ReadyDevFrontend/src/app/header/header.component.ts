@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(public router: Router, public toastr: ToastrService) { }
 
   ngOnInit(): void {
+  }
+
+  logout = () => {
+    localStorage.removeItem("jwt");
+    this.router.navigate(['/login']);
+    this.toastr.info("Login session has expired.");
   }
 
 }
