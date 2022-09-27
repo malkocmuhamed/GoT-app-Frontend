@@ -17,7 +17,6 @@ export class FamilyService {
     updateFamilyUrl = environment.baseUrl + '/api/family/editFamily';
     removeFamilyUrl = environment.baseUrl + '/api/family/removeFamily';
 
-
     constructor(private _http: HttpClient, public toastr: ToastrService) { }
 
     postFamily(family: Family) {

@@ -12,9 +12,9 @@ import { ToastrService } from "ngx-toastr";
     providedIn: 'root'
 })
 export class UserService {
+
     loginForm: FormGroup | any;
     invalidLogin: boolean | any;
-    
     usersUrl = environment.baseUrl + '/api/user';
     authUrl = environment.baseUrl + '/api/user/login';
     registerUserUrl = environment.baseUrl + '/api/user/register';
@@ -23,14 +23,16 @@ export class UserService {
         private _http: HttpClient,
         public toastr: ToastrService) 
         { 
-            this.loginForm = new FormGroup({
-            username: new FormControl('', [Validators.required]),
-            password: new FormControl('', [Validators.required])
-            });
-         }
+          this.initializeForm();
+        }    
 
-    
-    
+    initializeForm(){
+      this.loginForm = new FormGroup({
+        username: new FormControl('', [Validators.required]),
+        password: new FormControl('', [Validators.required])
+        });
+    }
+
     postUser(user: User) {
         return this._http.post<any>(this.registerUserUrl, user);
     }
@@ -47,10 +49,10 @@ export class UserService {
           .subscribe({
             next: (response: AuthenticatedResponse) => {
               const token = response.token;
-              localStorage.setItem("jwt", token); 
+              localStorage.setItem("token", token); 
               this.invalidLogin = false; 
               this.router.navigate(["/dashboard"]);
-              this.toastr.success('User authenticated successfully.');
+              this.toastr.success('User authenticated successfully.', "WELCOME!");
             },
             error: (err: HttpErrorResponse) => this.invalidLogin = false
           })
@@ -58,7 +60,7 @@ export class UserService {
       }
      
       logout(){
-        localStorage.removeItem("jwt");
+        localStorage.removeItem("token");
         this.router.navigate(['/login']);
         this.toastr.info("Login session has expired.");
       }

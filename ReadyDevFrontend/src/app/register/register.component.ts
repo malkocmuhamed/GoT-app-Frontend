@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators} from '@angular/forms';
 import { Route, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CustomValidator } from '../providers/CustomValidator';
-import { User } from '../_models/user.model';
 import { UserService } from '../_services/user.service';
 import { FormsModule } from '@angular/forms';
 
@@ -13,22 +12,10 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./register.component.css']
 })
 
-
 export class RegisterComponent implements OnInit {
 
-  title = 'material-register';
-  success = '';
+  public registerForm: FormGroup | any;
 
-  registerForm = new FormGroup(
-    {
-      name: new FormControl('', [Validators.required]),
-      username: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required]),
-      confirmpassword: new FormControl('', [Validators.required]),
-    },
-     CustomValidator.mustMatch('password', 'confirmpassword')
-    );
-  
   constructor
   (
     public toastr: ToastrService, 
@@ -38,14 +25,19 @@ export class RegisterComponent implements OnInit {
   { }
 
   ngOnInit(): void {
-    console.log(this.registerForm.valid)
+    this.initializeForm();
   }
  
-  get passwordMatchError() {
-    return (
-      this.registerForm.getError('mismatch') &&
-      this.registerForm.get('confirmpassword')?.touched
-    );
+  initializeForm(){
+    this.registerForm = new FormGroup(
+      {
+        name: new FormControl('', [Validators.required]),
+        username: new FormControl('', [Validators.required]),
+        password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+        confirmpassword: new FormControl('', [Validators.required]),
+      },
+       CustomValidator.mustMatch('password', 'confirmpassword')
+      );
   }
 
   onSubmit(): void{
@@ -54,7 +46,6 @@ export class RegisterComponent implements OnInit {
     }
     this.userService.postUser(this.registerForm.value).subscribe(
       data => {
-        console.log(data);
         this.toastr.success('Your registration has been approved. Sign in to continue.', 'Congratulations!');
       })
     this.router.navigate(['/login'])

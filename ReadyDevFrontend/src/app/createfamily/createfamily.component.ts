@@ -13,13 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class CreatefamilyComponent implements OnInit {
 
-  familyForm = new FormGroup(
-    {
-      familyName: new FormControl('', [Validators.required]),
-      logo: new FormControl('', [Validators.required]),
-      representative: new FormControl('', [Validators.required]),
-    },
-  );
+  public familyForm: FormGroup | any;
 
   constructor(
     public toastr: ToastrService,
@@ -29,6 +23,17 @@ export class CreatefamilyComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.initializeForm();
+  }
+
+  initializeForm(){
+    this.familyForm = new FormGroup(
+      {
+        familyName: new FormControl('', [Validators.required]),
+        logo: new FormControl('', [Validators.required]),
+        representative: new FormControl('', [Validators.required]),
+      },
+    );
   }
 
   addFamily(): void{
@@ -42,7 +47,6 @@ export class CreatefamilyComponent implements OnInit {
     )
     this.dialog.closeAll();
     location.reload();
-    this.router.navigate(['/families']);
     this.toastr.success('New family has been added.', "SUCCESS");
   }
   

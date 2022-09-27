@@ -13,7 +13,7 @@ export class AuthGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         
-        if (localStorage.getItem('jwt')?.length)
+        if (localStorage.getItem('token')?.length)
         {
             return true;
         }
@@ -22,7 +22,6 @@ export class AuthGuard implements CanActivate {
             this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
             this.toastr.error("User is not authenticated.", "ACCESS DENIED");
             return false;
-        }
-          
+        }        
     }
 }

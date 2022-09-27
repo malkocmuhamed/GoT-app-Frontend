@@ -14,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class DeletemodalComponent implements OnInit {
 
-  families: Family[];
+  families: Family[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<DeletemodalComponent>,
@@ -22,7 +22,6 @@ export class DeletemodalComponent implements OnInit {
     public familyService: FamilyService,
     public toastr: ToastrService) 
     { 
-      this.families = [];
     }
 
   ngOnInit(): void {
@@ -33,11 +32,11 @@ export class DeletemodalComponent implements OnInit {
 }
   removeFamily(id: number): void {
     let familyArray : Family[] = Array.from(this.families);
-    let index = familyArray.findIndex(element => element.id == id);
+    let index = familyArray.findIndex((element) => element.id == id);
     this.familyService.deleteFamily(id);
-    this.families.splice(index, 1);
+    familyArray.splice(index, 1);
     this.dialogRef.close();
     location.reload();
-
+    this.toastr.success('Family removed successfully.');
   }
 }

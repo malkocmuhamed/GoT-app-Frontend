@@ -1,8 +1,12 @@
 <div class="body">
     <h4 class="text-center"> Edit family</h4>
-    <h3 class="text-center">Fill the form to edit {{data.familyName}} family.</h3>
     <form [formGroup]="familyForm" (ngSubmit)="onSubmit()" novalidate class="d-flex-center">
-      <div class="example-container">
+      <div>
+        <div [hidden]="true">
+        <mat-form-field>
+          <input matInput formControlName="id">
+        </mat-form-field>
+      </div>
         <div>
             <mat-form-field>
               <input matInput formControlName="familyName">
@@ -27,7 +31,6 @@
             </mat-error>
           </mat-form-field>
         </div>
-     
         <div class="mt-top">
           <button [disabled]="!familyForm.valid"  mat-raised-button mat-button>Update</button>
         </div>         

@@ -31,16 +31,6 @@ const routes: Routes = [
     path: 'families',
     component: FamiliesComponent,
     canActivate: [AuthGuard]
-  },
-  {
-    path: 'editfamily',
-    component: EditfamilyComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'createfamily',
-    component: CreatefamilyComponent,
-    canActivate: [AuthGuard]
   }
 ];
 

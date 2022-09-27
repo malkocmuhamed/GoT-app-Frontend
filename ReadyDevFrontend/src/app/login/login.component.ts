@@ -13,15 +13,9 @@ import { UserService } from '../_services/user.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  title = 'material-login';
-  invalidLogin: boolean | any;
-  credentials: User = {name:'', username:'', password:''};
   loginForm = this.userService.loginForm;
 
-  constructor(
-    private router:Router, private toastr: ToastrService, private userService: UserService
-  ) {
-  }
+  constructor(private userService: UserService) {}
 
   ngOnInit(): void {
   }

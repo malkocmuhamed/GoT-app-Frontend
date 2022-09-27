@@ -1,10 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators} from '@angular/forms';
 import { Family } from '../_models/family.model';
-import { Route, Router } from '@angular/router';
+import { Route, Router, RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FamilyService } from '../_services/family.service';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DeletemodalComponent } from '../deletemodal/deletemodal.component';
 
 @Component({
@@ -14,36 +14,41 @@ import { DeletemodalComponent } from '../deletemodal/deletemodal.component';
 })
 export class EditfamilyComponent implements OnInit {
 
-  // familyForm : FormGroup | any;
-  familyModel = <Family>{};
+  public familyForm: FormGroup | any;
 
   constructor(
     public toastr: ToastrService,
     public router: Router,
     public familyService: FamilyService,
     public dialogRef: MatDialogRef<DeletemodalComponent>,
+    public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: Family,
     ) { }
 
-  familyForm = new FormGroup(
-    {
-      familyName: new FormControl('', [Validators.required]),
-      logo: new FormControl('', [Validators.required]),
-      representative: new FormControl('', [Validators.required])
-    }
-  );
-
   ngOnInit(): void {
+    this.initializeForm();
+  }
+
+  initializeForm(){
+    this.familyForm = new FormGroup(
+      {
+        id: new FormControl(''),
+        familyName: new FormControl('', [Validators.required]),
+        logo: new FormControl('', [Validators.required]),
+        representative: new FormControl('', [Validators.required])
+      }
+    );
+    this.familyForm.patchValue(this.data);
   }
 
   onSubmit(): void{
-  
+    console.log(this.data.id); 
     this.familyService.editFamily(this.familyForm.value).subscribe(
       data => {
-        this.toastr.success('Family successfully updated!');
+        this.data = data;
       })
-
-    this.router.navigate(['/families'])
+    this.dialog.closeAll();
+    location.reload();
+    this.toastr.success('Family successfully updated!');
   }
-
 }

@@ -14,10 +14,7 @@ import { EditfamilyComponent } from '../editfamily/editfamily.component';
 
 export class FamiliesComponent {
 
-  totalRecords: string = '';
-  page: Number = 1;
   families: Family[] = [];
-  name: any;
   
   constructor(private familyService: FamilyService, public dialog: MatDialog) { }
 
@@ -25,7 +22,6 @@ export class FamiliesComponent {
     this.getFamiliesList();
   }
 
-  
   getFamiliesList(): void {
     this.familyService.getFamiliesByUser().subscribe(data => {
       this.families = data;
@@ -36,10 +32,7 @@ export class FamiliesComponent {
     let family = this.families.find(x => x.id == id);
     this.dialog.open(DeletemodalComponent, {
       width: '300px',
-      data: {
-        id: family?.id,
-        familyName: family?.familyName
-      }
+      data: family
     });
   }
 
@@ -54,13 +47,8 @@ export class FamiliesComponent {
     let family = this.families.find(x => x.id == id);
     this.dialog.open(EditfamilyComponent, {
       width: '350px',
-      height: '400px',
-      data: {
-        id: family?.id,
-        familyName: family?.familyName,
-        logo: family?.logo,
-        representative: family?.representative
-      }
+      height: '380px',
+      data: family
     });
   }
 }
