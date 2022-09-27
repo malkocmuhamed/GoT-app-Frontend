@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators} from '@angular/forms';
 import { Route, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { CustomValidator } from '../providers/CustomValidator';
+import { CustomValidator } from '../_providers/CustomValidator';
 import { UserService } from '../_services/user.service';
 import { FormsModule } from '@angular/forms';
 
